@@ -47,15 +47,15 @@ object Example extends App {
 meta annotation `@Log`/`@LogFuture`affect a method at compile perprocess time:
 ```
 //before
-  @Log
-  def add1(x: Int) = {
-    x + 1
-  }
+@Log
+def add1(x: Int) = {
+	x + 1
+}
 //after parsed, ===> simple as:
-	def add1(x: Int)(implicit macroLogId: LogId, macroCallStack: CallStack, macroCallStackOut: CallStackOut) = {
-		println(s"current time - macroLogId - ... param: ${x}")
-		val result = { x + 1 }
-		println(s"current time - macroLogId - ... result: ${result}")
-		result
-	}
+def add1(x: Int)(implicit macroLogId: LogId, macroCallStack: CallStack, macroCallStackOut: CallStackOut) = {
+	println(s"current time - macroLogId - ... param: ${x}")
+	val result = { x + 1 }
+	println(s"current time - macroLogId - ... result: ${result}")
+	result
+}
 ```
