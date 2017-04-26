@@ -8,7 +8,7 @@ logging call stack method's information for reactive system.
 - scalameta (need Scala 2.11.11/2.12.x)
   - PS: 2.12.x not test
   
-## Example
+## [Example](https://github.com/LoranceChen/meta-logger/tree/master/src/test/scala-2.11)
 
 ### need log methods
 ```
