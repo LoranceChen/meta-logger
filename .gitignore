@@ -1,0 +1,20 @@
+logs
+target
+/.idea
+/.idea_modules
+/.classpath
+/.project
+/.settings
+/RUNNING_PID
+
+*.iml
+
+# editor
+*.swp
+
+# tmp
+*.log
+
+# Mac
+.DS_Store
+
