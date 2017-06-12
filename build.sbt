@@ -1,29 +1,75 @@
-name := "MetaLogger"
+name := "meta-logger"
 
-lazy val commonSettings = Seq(
-  version := "0.1-SNAPSHOT",
-  scalaVersion := "2.12.2",
-  scalacOptions ++= Seq(
-    "-deprecation",
-    "-feature",
-    "-language:postfixOps"
-  ),
+organization := "com.scalachan"
 
-  //macros
-  scalacOptions += "-Xplugin-require:macroparadise",
-  addCompilerPlugin("org.scalameta" % "paradise" % "3.0.0-M9" cross CrossVersion.full)
+scalaVersion := "2.12.2"
 
+ivyScala := ivyScala.value map { _.copy(overrideScalaVersion = true) }
+
+enablePlugins(SignedAetherPlugin)
+//
+disablePlugins(AetherPlugin)
+
+
+pgpSecretRing := file(Path.userHome + "/.sbt/gpg/secring.asc")
+
+pgpPublicRing := file(Path.userHome + "/.sbt/gpg/pubring.asc")
+
+//overridePublishSettings
+//
+//sonatypeProfileName := "com.scalachan"
+
+scalacOptions ++= Seq(
+  "-deprecation",
+  "-feature",
+  "-language:postfixOps",
+  "-language:implicitConversions",
+  "-Xplugin-require:macroparadise"
 )
 
-lazy val root = project.in(file(".")).
-  settings(commonSettings).
-  settings(resolvers += Resolver.bintrayIvyRepo("scalameta", "maven")).
-  settings(Seq(
-    //    addCompilerPlugin("org.scalameta" % "paradise" % "3.0.0-M8" cross CrossVersion.full),
-    //    scalacOptions += "-Xplugin-require:macroparadise",
-    scalacOptions in (Compile, console) := Seq(),
-    updateOptions := updateOptions.value.withCachedResolution(true)
-  )).
-  settings(libraryDependencies ++= Seq(
-    "org.scalameta" %% "scalameta" % "1.8.0" // % Provided // mark the dependency as % "provided" to exclude it from your runtime application.
-  ))
+//macros
+addCompilerPlugin("org.scalameta" % "paradise" % "3.0.0-M9" cross CrossVersion.full)
+
+resolvers += Resolver.bintrayIvyRepo("scalameta", "maven")
+scalacOptions in (Compile, console) := Seq()
+updateOptions := updateOptions.value.withCachedResolution(true)
+libraryDependencies ++= Seq(
+  "org.scalameta" %% "scalameta" % "1.8.0" // % Provided // mark the dependency as % "provided" to exclude it from your runtime application.
+)
+
+parallelExecution in Test := false
+
+publishTo <<= version { (v: String) =>
+  val nexus = "https://oss.sonatype.org/"
+  if (v.trim.endsWith("SNAPSHOT"))
+    Some("snapshots" at nexus + "content/repositories/snapshots")
+  //  Some("Sonatype Nexus Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots")
+  else
+    Some("Sonatype Nexus Staging"  at nexus + "service/local/staging/deploy/maven2")
+  //    Some("releases"  at "http://localhost:7070/nexus/repository/maven-releases/")
+
+}
+
+publishArtifact in Test := false
+
+credentials += Credentials(Path.userHome / ".ivy2" / ".nexus_cred")
+
+pomExtra in Global :=
+  <url>https://github.com/LoranceChen/RxSocket</url>
+    <licenses>
+      <license>
+        <name>Apache License, Version 2.0</name>
+        <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+      </license>
+    </licenses>
+    <scm>
+      <url>git@github.com/LoranceChen/RxSocket.git</url>
+      <connection>scm:git:git@github.com/LoranceChen/meta-logger.git</connection>
+    </scm>
+    <developers>
+      <developer>
+        <id>lorancechen</id>
+        <name>UnlimitedCode Inc.</name>
+        <url>http://www.scalachan.com/</url>
+      </developer>
+    </developers>
