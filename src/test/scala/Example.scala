@@ -32,7 +32,7 @@ object NeedLogMethod {
     Future{
       Thread.sleep(1000)
       add1(x)
-  }
+    }
   }
 
 }
