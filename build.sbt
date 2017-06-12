@@ -2,7 +2,7 @@ name := "MetaLogger"
 
 lazy val commonSettings = Seq(
   version := "0.1-SNAPSHOT",
-  scalaVersion := "2.11.11",
+  scalaVersion := "2.12.2",
   scalacOptions ++= Seq(
     "-deprecation",
     "-feature",
@@ -11,7 +11,7 @@ lazy val commonSettings = Seq(
 
   //macros
   scalacOptions += "-Xplugin-require:macroparadise",
-  addCompilerPlugin("org.scalameta" % "paradise" % "3.0.0-M8" cross CrossVersion.full)
+  addCompilerPlugin("org.scalameta" % "paradise" % "3.0.0-M9" cross CrossVersion.full)
 
 )
 
@@ -25,5 +25,5 @@ lazy val root = project.in(file(".")).
     updateOptions := updateOptions.value.withCachedResolution(true)
   )).
   settings(libraryDependencies ++= Seq(
-    "org.scalameta" %% "scalameta" % "1.7.0" // % Provided // mark the dependency as % "provided" to exclude it from your runtime application.
+    "org.scalameta" %% "scalameta" % "1.8.0" // % Provided // mark the dependency as % "provided" to exclude it from your runtime application.
   ))
