@@ -1,14 +1,13 @@
 # Meta Logger
-logging call stack method's information for reactive system.
+logging call stack method's invoke chain.
 
 ## Feature
 - automatic log method's parameters and result information by annotation.
 
 ## Dependency
-- scalameta (need Scala 2.11.11/2.12.x)
-  - PS: 2.12.x not test
-  
-## [Example](https://github.com/LoranceChen/meta-logger/tree/master/src/test/scala-2.11)
+- scalameta
+
+## [Example](https://github.com/LoranceChen/meta-logger/tree/master/src/test/scala)
 
 ### need log methods
 ```
@@ -44,7 +43,7 @@ object Example extends App {
 ```
 
 ## How does it works
-meta annotation `@Log`/`@LogFuture`affect a method at compile perprocess time:
+meta annotation `@Log`/`@LogFuture`affect a method at compile pre-process time:
 ```
 //before
 @Log
@@ -52,10 +51,10 @@ def add1(x: Int) = {
 	x + 1
 }
 //after parsed, ===> simple as:
-def add1(x: Int)(implicit macroLogId: LogId, macroCallStack: CallStack, macroCallStackOut: CallStackOut) = {
-	println(s"current time - macroLogId - ... param: ${x}")
+def add1(x: Int)(implicit metaLogContext: LogContext) = {
+	println(s"current time - metaLogContext.logId - ... param: ${x}")
 	val result = { x + 1 }
-	println(s"current time - macroLogId - ... result: ${result}")
+	println(s"current time - metaLogContext.logId - ... result: ${result}")
 	result
 }
 ```
