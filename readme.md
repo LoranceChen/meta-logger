@@ -48,3 +48,6 @@ def add1(x: Int)(implicit metaLogContext: LogContext) = {
 	result
 }
 ```
+
+## TODO
+- add a @VirtualLog for trait def (seems some bug in scalameta at this point)
