@@ -13,9 +13,9 @@ addCompilerPlugin("org.scalameta" % "paradise" % "3.0.0-M9" cross CrossVersion.f
 
 libraryDependencies += "com.scalachan" %% "meta-logger" % "0.1"
 ```
-### add annotation for your code
+### add annotation to your code
 ```
-import lorance.meta-logger._
+import lorance.metalogger._
 
 object Main extends App with MetaLogger {
 	NeedLog.something
