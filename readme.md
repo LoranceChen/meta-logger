@@ -15,7 +15,7 @@ libraryDependencies += "com.scalachan" %% "meta-logger" % "0.1"
 ```
 ### add annotation to your code
 ```
-import lorance.metalogger._
+import lorance.metalog._
 
 object Main extends App with MetaLogger {
 	NeedLog.something
