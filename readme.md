@@ -11,7 +11,7 @@ scalacOptions += "-Xplugin-require:macroparadise"
 resolvers += Resolver.bintrayIvyRepo("scalameta", "maven")
 addCompilerPlugin("org.scalameta" % "paradise" % "3.0.0-M9" cross CrossVersion.full)
 
-libraryDependencies += "com.scalachan" %% "meta-logger" % "0.1"
+libraryDependencies += "com.scalachan" % "meta-logger_2.12" % "0.1"
 ```
 ### add annotation to your code
 ```
